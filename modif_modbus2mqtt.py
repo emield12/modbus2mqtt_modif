@@ -42,7 +42,7 @@ parser.add_argument('--tcp', help='Act as a Modbus TCP master, connecting to hos
 parser.add_argument('--tcp-port', default='502', type=int, help='Port for Modbus TCP. Defaults to 502')
 parser.add_argument('--registers', required=True, help='Register definition file. Required!')
 parser.add_argument('--logS',default='DEBUG', help='set monitor log level to the specified value. Defaults to WARNING. Use DEBUG for maximum detail')
-parser.add_argument('--logF',default='ERROR' ,help='set file log level to the specified value. Defaults to WARNING. Use DEBUG for maximum detail')
+parser.add_argument('--logF',default='WARNING' ,help='set file log level to the specified value. Defaults to WARNING. Use DEBUG for maximum detail')
 parser.add_argument('--syslog', action='store_true', help='enable logging to syslog')
 parser.add_argument('--format', default='%(asctime)s -- %(levelname)s -- %(funcName)s -- %(lineno)d -- %(message)s', help='set the logging format')
 parser.add_argument('--force', default='0',type=int, help='publish values after "force" seconds since publish regardless of change. Defaults to 0 (change only)')
