@@ -61,7 +61,7 @@ handler_stream = logging.StreamHandler()
 handler_stream.setFormatter(loggingFormat)
 handler_stream.setLevel(args.logS)
 
-handler_file = logging.FileHandler(filename=args.fname)
+handler_file = logging.handlers.RotatingFileHandler(args.fname,maxBytes = 5096, backupCount = 5) #backupCount means that there will never be more than 6 log files at the same time
 handler_file.setFormatter(loggingFormat)
 handler_file.setLevel(args.logF)
 
@@ -78,7 +78,7 @@ if args.syslog:
     handler_syslog.setFormatter(loggingFormat)
     handler_syslog.setLevel(logging.ERROR)
     logger.addHandler(handler_syslog)
-    
+
 topic=args.mqtt_topic
 if not topic.endswith("/"):
     topic+="/"
@@ -86,6 +86,8 @@ if not topic.endswith("/"):
 logger.info('Starting modbus2mqtt V%s with topic prefix \"%s\"' %(version, topic))
 logger.info('ClientID: \"%s\"' %(args.clientid))
 logger.info(args.force)
+
+
 
 def signal_handler(signal, frame):
         print('Exiting ' + sys.argv[0])
