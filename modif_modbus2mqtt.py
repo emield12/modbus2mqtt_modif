@@ -55,24 +55,24 @@ args=parser.parse_args()
 #    logging.getLogger().addHandler(logging.handlers.SysLogHandler())
 #else:
 #    logging.getLogger().addHandler(logging.StreamHandler(sys.stdout))
-loggingFormat =logging.Formatter(args.format)
+loggingFormat =logging.Formatter(args.format) #define how the log will be written
 
-handler_stream = logging.StreamHandler()
+handler_stream = logging.StreamHandler()#Gestionnaire de flux pour moniteur serie
 handler_stream.setFormatter(loggingFormat)
 handler_stream.setLevel(args.logS)
 
+#gestionnaire de flux vers un fichier
 handler_file = logging.handlers.RotatingFileHandler(args.fname,maxBytes = 5096, backupCount = 5) #backupCount means that there will never be more than 6 log files at the same time
 handler_file.setFormatter(loggingFormat)
 handler_file.setLevel(args.logF)
 
-
-
+#definition de l'objet logger, de son niveau de log et ajout des gestionaire de flux
 logger = logging.getLogger(__name__)
 logger.setLevel(logging.INFO)
 logger.addHandler(handler_file)
 logger.addHandler(handler_stream)
 
-
+#gestionnaire de flux vers le syslog
 if args.syslog:
     handler_syslog = logging.handlers.SysLogHandler()
     handler_syslog.setFormatter(loggingFormat)
