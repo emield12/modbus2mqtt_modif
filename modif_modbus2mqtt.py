@@ -199,7 +199,7 @@ def messagehandler(mqc,userdata,msg):
     except Exception as e:
         logger.error("Error on message " + msg.topic + " :" + str(e))
     
-def connecthandler(mqc,userdata,rc):
+def connecthandler(mqc,userdata,flags,rc):
     logger.info("Connected to MQTT broker with rc=%d" % (rc))
     mqc.subscribe(topic+"set/+/"+str(cst.WRITE_SINGLE_REGISTER)+"/+")
     mqc.subscribe(topic+"set/+/"+str(cst.WRITE_SINGLE_COIL)+"/+")
@@ -239,7 +239,7 @@ while tryToConnect == False: #loop until it's connected
             time.sleep(1)
 
     except Exception as e:
-        loger.error("Unhandled error [" + str(e) + "]")
+        logger.error("Unhandled error [" + str(e) + "]")
         tryToConnect = True
         #sys.exit(1)
     
